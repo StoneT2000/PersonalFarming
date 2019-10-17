@@ -1,0 +1,30 @@
+{
+  "name": "personalfarming",
+  "version": "1.0.0",
+  "description": "IEEE QP++",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StoneT2000/PersonalFarming.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StoneT2000/PersonalFarming/issues"
+  },
+  "homepage": "https://github.com/StoneT2000/PersonalFarming#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "config": "^3.2.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.5",
+    "validation": "0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
