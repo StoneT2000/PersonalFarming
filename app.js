@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 //const connectDB = require('./config/db');
 const path = require('path');
@@ -31,7 +32,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-/*
+*/
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -64,4 +66,3 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-*/
