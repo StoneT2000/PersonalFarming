@@ -4,7 +4,9 @@
   "description": "IEEE QP++",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
-},
-  "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  }
 }
