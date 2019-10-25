@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Header from './components/Header';
-import Home from './components/Home';
+import Home from './components/Home/index';
+import Dashboard from './components/Dashboard/index';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Router>
         <div>
           <Route exact path='/' component={Home} />
+           <Route exact path='/dashboard' component={Dashboard} />
       </div>
       </Router>
     </div>
