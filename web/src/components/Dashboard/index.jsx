@@ -44,7 +44,7 @@ const plantPreciptationDataset = {
       pointHoverBorderWidth: 2,
       pointRadius: 3,
       pointHitRadius: 10,
-      data: [100, 102, 101, 98, 94, 91, 98, 102,100,100]
+      data: [100, 100.2, 100.8, 99.8, 99.7, 99.2, 99.4, 99.5,100.3,100.2]
     }
   ]
 };

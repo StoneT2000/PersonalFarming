@@ -1,14 +1,16 @@
 import React from 'react';
-import './index.css';
-function Header() {
+import {Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import './index.scss';
+function Header(props) {
+
   return (
-    <header className="Header">
-        <ul>
-        <a href="/"><li>Home</li></a>
-        <a href="dashboard"><li>Dashboard</li></a>
-        <a><li>Other?</li></a>
-        </ul>
-    </header>
+    <Menu stackable className="Header">
+       <Menu.Item id='menu-bars-wrapper'>
+         <Icon name="bars" id='menu-bars' onClick={() => {
+           props.visibleHandle(!props.visible)
+         }}/>
+       </Menu.Item>
+       </Menu>
   );
 }
 

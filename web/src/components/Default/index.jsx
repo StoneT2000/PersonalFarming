@@ -1,11 +1,12 @@
 import React from 'react';
-import Header from '../Header/index.jsx';
-import './index.css';
+
+import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import './index.scss';
 //import Default from '../Default/index.jsx';
 function Default(props) {
   return (
      <div className='Default'>
-        <Header />
+
         <div className='container'>
             {props.children}
         </div>

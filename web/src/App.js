@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import SidebarFarm from './components/Sidebar/index.jsx';
+import Header from './components/Header'
 import Home from './components/Home/index';
 import Dashboard from './components/Dashboard/index';
 
 function App() {
+  const [visible, setVisible] = useState(false);
   return (
     <div className="App">
+    <Header visibleHandle = {setVisible} visible={visible} />
+    <SidebarFarm visibleHandle = {setVisible} visible={visible}>
       <Router>
         <div>
           <Route exact path='/' component={Home} />
-           <Route exact path='/dashboard' component={Dashboard} />
-      </div>
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/reports' component={Home} />
+        </div>
       </Router>
+      </SidebarFarm>
     </div>
   );
 }
