@@ -11,19 +11,23 @@ function App() {
   const [visible, setVisible] = useState(false);
   return (
     <div className="App">
-    <Header visibleHandle = {setVisible} visible={visible} />
-    <SidebarFarm visibleHandle = {setVisible} visible={visible}>
-      <Router>
-        <div>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/reports' component={Home} />
-        </div>
-      </Router>
-      </SidebarFarm>
-    </div>
+      <div className="App__Form">
+        <Header visibleHandle = {setVisible} visible={visible} />
+        <SidebarFarm visibleHandle = {setVisible} visible={visible}>
+          <Router>
+            <div>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/dashboard' component={Dashboard} />
+              <Route exact path='/reports' component={Home} />
+            </div>
+          </Router>
+          </SidebarFarm>
+          </div>
+      </div>
+    
   );
 }
+
 //<Route path='/show-book/:id' component={Dashboard} />
 //<Route path='/show-book/:id' component={Reports} />
 export default App;

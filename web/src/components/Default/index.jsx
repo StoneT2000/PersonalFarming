@@ -6,7 +6,6 @@ import './index.scss';
 function Default(props) {
   return (
      <div className='Default'>
-
         <div className='container'>
             {props.children}
         </div>
