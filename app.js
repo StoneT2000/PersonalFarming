@@ -37,12 +37,16 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const connectDB = require('./config/db');
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+connectDB();
+const recordAPI = require('./routes/api/record');
+app.use("/api/record", recordAPI);
 
 // API calls
 app.get('/api/hello', (req, res) => {

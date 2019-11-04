@@ -1,7 +1,13 @@
-import React, {useEffect} from 'react';
-import './index.css';
+import React, {useEffect, useState} from 'react';
+import './index.scss';
 import {Chart, Line, Scatter } from 'react-chartjs-2';
 import Default from '../Default';
+import axios from 'axios';
+
+function useForceUpdate(){
+    const [value, setValue] = useState(true); //boolean state
+    return () => setValue(!value); // toggle the state to force render
+}
 
 let lineData = [{
     x: 10,
@@ -21,12 +27,12 @@ function generateDates() {
   return dateLabels;
 
 }
-const plantPreciptationDataset = {
-  labels: generateDates(),
+let dataSetOptions = {
+  labels: [],
   datasets: [
     {
       label: 'Plant Preciptation',
-      fill: false,
+      fill: true,
       showLine: true,
       lineTension: 0.5,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -44,17 +50,20 @@ const plantPreciptationDataset = {
       pointHoverBorderWidth: 2,
       pointRadius: 3,
       pointHitRadius: 10,
-      data: [100, 100.2, 100.8, 99.8, 99.7, 99.2, 99.4, 99.5,100.3,100.2]
+      data: []
     }
   ]
-};
-
+}
+let plantPreciptationDataset = JSON.parse(JSON.stringify(dataSetOptions));
+plantPreciptationDataset.datasets[0].data = [100, 100.2, 100.8, 99.8, 99.7, 99.2, 99.4, 99.5,100.3,100.2]
+plantPreciptationDataset.labels = generateDates();
+console.log(plantPreciptationDataset)
 
 let plantPHDataset = {
   labels: generateDates(),
   datasets: [
     {
-      label: 'Plant pH Levels',
+      label: 'Plant Light Levels',
       showLine: true,
       lineTension: 0.5,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -76,47 +85,75 @@ let plantPHDataset = {
     }
   ]
 }
+let lightDataset = JSON.parse(JSON.stringify(dataSetOptions));
+lightDataset.datasets[0].label = "Plant Light Levels";
+let humidityDataset = JSON.parse(JSON.stringify(dataSetOptions));
+humidityDataset.datasets[0].label = "Humidity Levels";
+let tempDataset = JSON.parse(JSON.stringify(dataSetOptions));
+tempDataset.datasets[0].label = "Temperature Levels";
+let soilMoistureDataset = JSON.parse(JSON.stringify(dataSetOptions));
+soilMoistureDataset.datasets[0].label = "Soil Moisture Levels";
+function Dashboard(props) {
+  let [_lightDataset, setLight] = useState(lightDataset);
+  let [_tempDataset, setTemp] = useState(tempDataset);
+  let [_humidityDataset, setHumidity] = useState(humidityDataset);
+  let [_soilMoistureDataset, setSoilMoisture] = useState(soilMoistureDataset);
 
-function Dashboard() {
   let chartReference = React.createRef();
+  let chartReferenceLight = React.createRef();
+  let chartReferenceHumidity = React.createRef();
+  let chartReferenceTemp = React.createRef();
+  let chartReferenceSoilMoisture = React.createRef();
+  let userKey = "Helloplants!"; // props.user.key
+  useEffect(() => {
+    axios.get('/api/record/' + userKey)
+    .then(function (res) {
+      console.log(res);
 
-  const plantPHDataset = (canvas, height) => {
-    const ctx = canvas.getContext("2d")
-    if (!height) {
-      height = ctx.canvas.height/2;
-    }
-    //console.log(canvas.height);
-    var gradientStroke = ctx.createLinearGradient(0, 0, 0, canvas.height);gradientStroke.addColorStop(0, "rgba(75,192,192,1)");gradientStroke.addColorStop(1, "rgba(75,192,192,0)");
+      for (let i = 0; i < res.data.length; i++) {
+        let rowDate = (new Date(res.data[i].timestamp)).toLocaleDateString();
 
-    return {  labels: generateDates(),
-      datasets: [
-        {
-          label: 'Plant pH Levels',
-          showLine: true,
-          lineTension: 0.5,
-          backgroundColor: gradientStroke,
-          borderColor: 'rgba(75,192,192,1)',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointRadius: 3,
-          pointHitRadius: 10,
-          data: [6.4,6.5,6.4,6.6,6.5,6.5,6.3,6.4, 6.4, 6.5, 6.6, 6.4]
+        if (res.data[i].humidity) {
+          humidityDataset.datasets[0].data.push(parseFloat(res.data[i].humidity.$numberDecimal));
+          humidityDataset.labels.push(rowDate);
         }
-      ]
-    }
-  }
-  Chart.pluginService.register({
-
-  });
+        if (res.data[i].light) {
+          lightDataset.datasets[0].data.push(parseFloat(res.data[i].light.$numberDecimal));
+          lightDataset.labels.push(rowDate);
+        }
+        if (res.data[i].temp) {
+          tempDataset.datasets[0].data.push(parseFloat((res.data[i].temperature.$numberDecimal)));
+          tempDataset.labels.push(rowDate);
+        }
+        if (res.data[i].soilMoisture) {
+          soilMoistureDataset.datasets[0].data.push(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
+          soilMoistureDataset.labels.push(rowDate);
+        }
+        //res.data[i].humidity.$numberDecimal;
+        //res.data[i].light.$numberDecimal;
+        //res.data[i].humidity.$numberDecimal;
+      }
+      setLight(lightDataset);
+      chartReferenceLight.current.chartInstance.update()
+      setHumidity(humidityDataset);
+      chartReferenceHumidity.current.chartInstance.update()
+      setTemp(tempDataset);
+      chartReferenceTemp.current.chartInstance.update()
+      setSoilMoisture(soilMoistureDataset);
+      chartReferenceSoilMoisture.current.chartInstance.update();
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+  }, []);
+  console.log(plantPHDataset);
+  console.log(lightDataset);
+  setTimeout(function(){
+    setLight(lightDataset);
+  }, 500)
   let phGradient = [{
     afterLayout: function(chart, options) {
       // create a linear gradient with the dimentions of the scale
@@ -126,12 +163,6 @@ function Dashboard() {
       chart.data.datasets[0].backgroundColor = gradientStroke;
     }
   }]
-  window.addEventListener("resize", function(){
-    console.log(chartReference);
-    let canvas= chartReference.current.chartInstance.canvas;
-    const ctx = canvas.getContext("2d")
-
-});
   return (
       <Default>
         <div className="Dashboard">
@@ -140,9 +171,12 @@ function Dashboard() {
             Charts, data, reports etc., live data?
             </div>
             <div className="graphs">
-            <Line data={plantPreciptationDataset} id='plant-preciptation-data'/>
-            <Line data={plantPHDataset} id='plant-ph-data' ref={chartReference} plugins={phGradient}/>
+            <Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient}/>
 
+            <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient}/>
+            <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient}/>
+            <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient}/>
+            <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient}/>
             </div>
         </div>
     </Default>
