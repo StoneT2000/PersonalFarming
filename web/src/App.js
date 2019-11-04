@@ -6,6 +6,7 @@ import SidebarFarm from './components/Sidebar/index.jsx';
 import Header from './components/Header'
 import Home from './components/Home/index';
 import Dashboard from './components/Dashboard/index';
+import Login from './components/Login/index';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -19,12 +20,13 @@ function App() {
               <Route exact path='/' component={Home} />
               <Route exact path='/dashboard' component={Dashboard} />
               <Route exact path='/reports' component={Home} />
+              <Route exact path='/login' component={Login} />
             </div>
           </Router>
           </SidebarFarm>
           </div>
       </div>
-    
+
   );
 }
 

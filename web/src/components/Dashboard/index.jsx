@@ -33,6 +33,7 @@ let dataSetOptions = {
     {
       label: 'Plant Preciptation',
       fill: true,
+      fontColor: 'white',
       showLine: true,
       lineTension: 0.5,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -163,6 +164,26 @@ function Dashboard(props) {
       chart.data.datasets[0].backgroundColor = gradientStroke;
     }
   }]
+  let chartOptions = {
+    title: {
+      fontColor: "white"
+    },
+    legend: {
+      labels: {
+        fontColor: "white"
+      }
+    },
+    scales: {
+      yAxes: [{ticks: {
+        fontColor: "whitew"
+      }
+    }],
+    xAxes: [{ticks: {
+      fontColor: "whitew"
+    }
+  }]
+    }
+  }
   return (
       <Default>
         <div className="Dashboard">
@@ -171,12 +192,11 @@ function Dashboard(props) {
             Charts, data, reports etc., live data?
             </div>
             <div className="graphs">
-            <Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient}/>
-
-            <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient}/>
-            <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient}/>
-            <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient}/>
-            <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient}/>
+            <Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient} options={chartOptions}/>
+            <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptions}/>
+            <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient} options={chartOptions}/>
+            <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient} options={chartOptions}/>
+            <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient} options={chartOptions}/>
             </div>
         </div>
     </Default>

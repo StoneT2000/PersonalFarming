@@ -48,6 +48,9 @@ connectDB();
 const recordAPI = require('./routes/api/record');
 app.use("/api/record", recordAPI);
 
+const authAPI = require('./routes/api/auth');
+app.use("/api/auth", authAPI);
+
 // API calls
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
