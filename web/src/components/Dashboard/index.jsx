@@ -122,7 +122,7 @@ function Dashboard(props) {
           lightDataset.datasets[0].data.push(parseFloat(res.data[i].light.$numberDecimal));
           lightDataset.labels.push(rowDate);
         }
-        if (res.data[i].temp) {
+        if (res.data[i].temperature) {
           tempDataset.datasets[0].data.push(parseFloat((res.data[i].temperature.$numberDecimal)));
           tempDataset.labels.push(rowDate);
         }
@@ -140,6 +140,7 @@ function Dashboard(props) {
       chartReferenceHumidity.current.chartInstance.update()
       setTemp(tempDataset);
       chartReferenceTemp.current.chartInstance.update()
+      console.log(tempDataset);
       setSoilMoisture(soilMoistureDataset);
       chartReferenceSoilMoisture.current.chartInstance.update();
     })
@@ -150,11 +151,18 @@ function Dashboard(props) {
       // always executed
     });
   }, []);
-  console.log(plantPHDataset);
-  console.log(lightDataset);
-  setTimeout(function(){
-    setLight(lightDataset);
-  }, 500)
+
+  // pseudo data generator
+  setInterval(function(){
+    //setLight(lightDataset);
+    let ld = lightDataset;
+    ld.datasets[0].data.push((Math.random()/5 + 3).toFixed(1));
+    let d = new Date();
+    ld.labels.push( d.getHours() + ":" + d.getMinutes() + ":" + (d).getSeconds());
+    setLight(ld);
+    console.log(ld);
+    chartReferenceLight.current.chartInstance.update();
+  }, 5000)
   let phGradient = [{
     afterLayout: function(chart, options) {
       // create a linear gradient with the dimentions of the scale
@@ -175,7 +183,8 @@ function Dashboard(props) {
     },
     scales: {
       yAxes: [{ticks: {
-        fontColor: "whitew"
+        fontColor: "whitew",
+        suggestedMax: 3.4
       }
     }],
     xAxes: [{ticks: {
