@@ -27,6 +27,7 @@ function generateDates() {
   return dateLabels;
 
 }
+Chart.defaults.global.animation.duration = 0;
 let dataSetOptions = {
   labels: [],
   datasets: [
@@ -90,20 +91,20 @@ function Dashboard(props) {
       let rowDate = (new Date(res.data[i].timestamp)).toTimeString().substring(0,8);
 
       if (res.data[i].humidity) {
-        humidityDataset.datasets[0].data.push(parseFloat(res.data[i].humidity.$numberDecimal));
-        humidityDataset.labels.push(rowDate);
+        humidityDataset.datasets[0].data.unshift(parseFloat(res.data[i].humidity.$numberDecimal));
+        humidityDataset.labels.unshift(rowDate);
       }
       if (res.data[i].light) {
-        lightDataset.datasets[0].data.push(parseFloat(res.data[i].light.$numberDecimal));
-        lightDataset.labels.push(rowDate);
+        lightDataset.datasets[0].data.unshift(parseFloat(res.data[i].light.$numberDecimal));
+        lightDataset.labels.unshift(rowDate);
       }
       if (res.data[i].temperature) {
-        tempDataset.datasets[0].data.push(parseFloat((res.data[i].temperature.$numberDecimal)));
-        tempDataset.labels.push(rowDate);
+        tempDataset.datasets[0].data.unshift(parseFloat((res.data[i].temperature.$numberDecimal)));
+        tempDataset.labels.unshift(rowDate);
       }
       if (res.data[i].soilMoisture) {
-        soilMoistureDataset.datasets[0].data.push(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
-        soilMoistureDataset.labels.push(rowDate);
+        soilMoistureDataset.datasets[0].data.unshift(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
+        soilMoistureDataset.labels.unshift(rowDate);
       }
     }
     //chartReferenceLight.current.chartInstance.clear(); // avoid ui issues

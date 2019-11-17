@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
     }
   }
   let pumpState = "off";
-  if (serialized.soilMoisture <= 30) {
+  if (serialized.soilMoisture <= 375) {
     pumpState = "on";
   }
 
@@ -53,7 +53,7 @@ router.post('/togglepump', (req, res) => {
 /* Retrieve data by ID, time frame etc. */
 router.get('/:key', (req, res) => {
   console.log(req.params);
-  PlantStats.find({key: req.params.key})
+  PlantStats.find({key: req.params.key}).sort({$natural:-1}).limit(40)
     .then(stats => res.status(200).json(stats))
     .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
 });
