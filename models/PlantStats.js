@@ -24,7 +24,7 @@ let PlantStatsSchema = new mongoose.Schema({
   },
   key: {
     type: String,
-    required: true 
+    required: true
   }
 });
 
