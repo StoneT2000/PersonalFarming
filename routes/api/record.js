@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 
   console.log(serialized);
   PlantStats.create(serialized)
-    .then(record => res.json({ msg: 'Plant record added successfully', pump: pumpState }))
+    .then(record => res.send(pumpState))
     .catch(err => res.status(400).json({ error: 'Unable to add this plant record' }));
 });
 
