@@ -94,6 +94,7 @@ let tempDataset = JSON.parse(JSON.stringify(dataSetOptions));
 tempDataset.datasets[0].label = "Temperature Levels";
 let soilMoistureDataset = JSON.parse(JSON.stringify(dataSetOptions));
 soilMoistureDataset.datasets[0].label = "Soil Moisture Levels";
+
 function Dashboard(props) {
   let [_lightDataset, setLight] = useState(lightDataset);
   let [_tempDataset, setTemp] = useState(tempDataset);
@@ -106,59 +107,72 @@ function Dashboard(props) {
   let chartReferenceTemp = React.createRef();
   let chartReferenceSoilMoisture = React.createRef();
   let userKey = "Helloplants!"; // props.user.key
-  useEffect(() => {
+  const updateCharts = (res) => {
+    lightDataset = JSON.parse(JSON.stringify(dataSetOptions));
+    lightDataset.datasets[0].label = "Plant Light Levels";
+    humidityDataset = JSON.parse(JSON.stringify(dataSetOptions));
+    humidityDataset.datasets[0].label = "Humidity Levels";
+    tempDataset = JSON.parse(JSON.stringify(dataSetOptions));
+    tempDataset.datasets[0].label = "Temperature Levels";
+    soilMoistureDataset = JSON.parse(JSON.stringify(dataSetOptions));
+    soilMoistureDataset.datasets[0].label = "Soil Moisture Levels";
+    for (let i = 0; i < res.data.length; i++) {
+      let rowDate = (new Date(res.data[i].timestamp)).toLocaleDateString();
 
-  }, []);
-  setInterval(function() {
-    axios.get('https://personal-farming.herokuapp.com/api/record/' + userKey,
+      if (res.data[i].humidity) {
+        humidityDataset.datasets[0].data.push(parseFloat(res.data[i].humidity.$numberDecimal));
+        humidityDataset.labels.push(rowDate);
+      }
+      if (res.data[i].light) {
+        lightDataset.datasets[0].data.push(parseFloat(res.data[i].light.$numberDecimal));
+        lightDataset.labels.push(rowDate);
+      }
+      if (res.data[i].temperature) {
+        tempDataset.datasets[0].data.push(parseFloat((res.data[i].temperature.$numberDecimal)));
+        tempDataset.labels.push(rowDate);
+      }
+      if (res.data[i].soilMoisture) {
+        soilMoistureDataset.datasets[0].data.push(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
+        soilMoistureDataset.labels.push(rowDate);
+      }
+      //res.data[i].humidity.$numberDecimal;
+      //res.data[i].light.$numberDecimal;
+      //res.data[i].humidity.$numberDecimal;
+    }
+    setLight(lightDataset);
+    //chartReferenceLight.current.chartInstance.update()
+    setHumidity(humidityDataset);
+    //chartReferenceHumidity.current.chartInstance.update()
+    setTemp(tempDataset);
+    //chartReferenceTemp.current.chartInstance.update()
+    setSoilMoisture(soilMoistureDataset);
+    //chartReferenceSoilMoisture.current.chartInstance.update();
+  }
+  const getDataAndUpdate = () => {
+    axios.get('/api/record/' + userKey,
     {
       validateStatus: function (status) {
         return status < 10000; // Reject only if the status code is greater than or equal to 500
       }
     })
     .then(function (res) {
-      console.log(res);
-
-      for (let i = 0; i < res.data.length; i++) {
-        let rowDate = (new Date(res.data[i].timestamp)).toLocaleDateString();
-
-        if (res.data[i].humidity) {
-          humidityDataset.datasets[0].data.push(parseFloat(res.data[i].humidity.$numberDecimal));
-          humidityDataset.labels.push(rowDate);
-        }
-        if (res.data[i].light) {
-          lightDataset.datasets[0].data.push(parseFloat(res.data[i].light.$numberDecimal));
-          lightDataset.labels.push(rowDate);
-        }
-        if (res.data[i].temperature) {
-          tempDataset.datasets[0].data.push(parseFloat((res.data[i].temperature.$numberDecimal)));
-          tempDataset.labels.push(rowDate);
-        }
-        if (res.data[i].soilMoisture) {
-          soilMoistureDataset.datasets[0].data.push(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
-          soilMoistureDataset.labels.push(rowDate);
-        }
-        //res.data[i].humidity.$numberDecimal;
-        //res.data[i].light.$numberDecimal;
-        //res.data[i].humidity.$numberDecimal;
-      }
-      setLight(lightDataset);
-      chartReferenceLight.current.chartInstance.update()
-      setHumidity(humidityDataset);
-      chartReferenceHumidity.current.chartInstance.update()
-      setTemp(tempDataset);
-      chartReferenceTemp.current.chartInstance.update()
-      console.log(tempDataset);
-      setSoilMoisture(soilMoistureDataset);
-      chartReferenceSoilMoisture.current.chartInstance.update();
+      updateCharts(res);
     })
     .catch(function (error) {
-      console.log(error.toJSON());
+      console.log(error);
     })
     .finally(function () {
       // always executed
     });
-  },1000)
+
+  }
+  useEffect(() => {
+    getDataAndUpdate();
+    setInterval(function() {
+      getDataAndUpdate();
+    },1000)
+  }, []);
+
 
   // pseudo data generator
   /*
