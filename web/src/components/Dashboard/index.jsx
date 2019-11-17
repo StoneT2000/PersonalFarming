@@ -55,37 +55,7 @@ let dataSetOptions = {
     }
   ]
 }
-let plantPreciptationDataset = JSON.parse(JSON.stringify(dataSetOptions));
-plantPreciptationDataset.datasets[0].data = [100, 100.2, 100.8, 99.8, 99.7, 99.2, 99.4, 99.5,100.3,100.2]
-plantPreciptationDataset.labels = generateDates();
-console.log(plantPreciptationDataset)
 
-let plantPHDataset = {
-  labels: generateDates(),
-  datasets: [
-    {
-      label: 'Plant Light Levels',
-      showLine: true,
-      lineTension: 0.5,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 3,
-      pointHitRadius: 10,
-      data: [6.4,6.5,6.4,6.6,6.5,6.5,6.3,6.4, 6.4, 6.5, 6.6, 6.4]
-    }
-  ]
-}
 let lightDataset = JSON.parse(JSON.stringify(dataSetOptions));
 lightDataset.datasets[0].label = "Plant Light Levels";
 let humidityDataset = JSON.parse(JSON.stringify(dataSetOptions));
@@ -117,7 +87,7 @@ function Dashboard(props) {
     soilMoistureDataset = JSON.parse(JSON.stringify(dataSetOptions));
     soilMoistureDataset.datasets[0].label = "Soil Moisture Levels";
     for (let i = 0; i < res.data.length; i++) {
-      let rowDate = (new Date(res.data[i].timestamp)).toLocaleDateString();
+      let rowDate = (new Date(res.data[i].timestamp)).toTimeString().substring(0,8);
 
       if (res.data[i].humidity) {
         humidityDataset.datasets[0].data.push(parseFloat(res.data[i].humidity.$numberDecimal));
@@ -135,18 +105,14 @@ function Dashboard(props) {
         soilMoistureDataset.datasets[0].data.push(parseFloat((res.data[i].soilMoisture.$numberDecimal)));
         soilMoistureDataset.labels.push(rowDate);
       }
-      //res.data[i].humidity.$numberDecimal;
-      //res.data[i].light.$numberDecimal;
-      //res.data[i].humidity.$numberDecimal;
     }
+    //chartReferenceLight.current.chartInstance.clear(); // avoid ui issues
     setLight(lightDataset);
-    //chartReferenceLight.current.chartInstance.update()
+
     setHumidity(humidityDataset);
-    //chartReferenceHumidity.current.chartInstance.update()
+    //chartReferenceHumidity.current.chartInstance.clear();
     setTemp(tempDataset);
-    //chartReferenceTemp.current.chartInstance.update()
     setSoilMoisture(soilMoistureDataset);
-    //chartReferenceSoilMoisture.current.chartInstance.update();
   }
   const getDataAndUpdate = () => {
     axios.get('/api/record/' + userKey,
@@ -216,18 +182,21 @@ function Dashboard(props) {
   }]
     }
   }
+  //<Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient} options={chartOptions}/>
   return (
       <Default>
         <div className="Dashboard">
             <div className="greeting">
-            <h1>Your Dashboard</h1>
-            Charts, data, reports etc., live data?
+            <h1>Dashboard</h1>
             </div>
             <div className="graphs">
-            <Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient} options={chartOptions}/>
+            <h2>Plant Light Levels</h2>
             <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptions}/>
+            <h2>Plant Temperature Levels</h2>
             <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient} options={chartOptions}/>
+            <h2>Plant Humidity Levels</h2>
             <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient} options={chartOptions}/>
+            <h2>Soil Moisture Levels</h2>
             <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient} options={chartOptions}/>
             </div>
         </div>

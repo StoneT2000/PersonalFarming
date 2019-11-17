@@ -34,11 +34,18 @@ router.post('/', (req, res) => {
         break;
     }
   }
+  let pumpState = "off";
+
   console.log(serialized);
   PlantStats.create(serialized)
-    .then(record => res.json({ msg: 'Plant record added successfully' }))
+    .then(record => res.json({ msg: 'Plant record added successfully', pump: pumpState }))
     .catch(err => res.status(400).json({ error: 'Unable to add this plant record' }));
 });
+
+router.post('/togglepump', (req, res) => {
+  res.json({pump: "on"});
+})
+
 
 /* Retrieve data by ID, time frame etc. */
 router.get('/:key', (req, res) => {
