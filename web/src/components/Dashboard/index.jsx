@@ -107,7 +107,15 @@ function Dashboard(props) {
   let chartReferenceSoilMoisture = React.createRef();
   let userKey = "Helloplants!"; // props.user.key
   useEffect(() => {
-    axios.get('/api/record/' + userKey)
+
+  }, []);
+  setInterval(function() {
+    axios.get('https://personal-farming.herokuapp.com/api/record/' + userKey,
+    {
+      validateStatus: function (status) {
+        return status < 10000; // Reject only if the status code is greater than or equal to 500
+      }
+    })
     .then(function (res) {
       console.log(res);
 
@@ -145,14 +153,15 @@ function Dashboard(props) {
       chartReferenceSoilMoisture.current.chartInstance.update();
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error.toJSON());
     })
     .finally(function () {
       // always executed
     });
-  }, []);
+  },1000)
 
   // pseudo data generator
+  /*
   setInterval(function(){
     //setLight(lightDataset);
     let ld = lightDataset;
@@ -162,7 +171,7 @@ function Dashboard(props) {
     setLight(ld);
     console.log(ld);
     chartReferenceLight.current.chartInstance.update();
-  }, 5000)
+  }, 5000)*/
   let phGradient = [{
     afterLayout: function(chart, options) {
       // create a linear gradient with the dimentions of the scale

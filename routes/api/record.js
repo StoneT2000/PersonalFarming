@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
 router.get('/:key', (req, res) => {
   console.log(req.params);
   PlantStats.find({key: req.params.key})
-    .then(stats => res.json(stats))
+    .then(stats => res.status(200).json(stats))
     .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
 });
 
