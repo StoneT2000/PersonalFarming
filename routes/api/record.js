@@ -35,6 +35,9 @@ router.post('/', (req, res) => {
     }
   }
   let pumpState = "off";
+  if (serialized.soilMoisture <= 30) {
+    pumpState = "on";
+  }
 
   console.log(serialized);
   PlantStats.create(serialized)
