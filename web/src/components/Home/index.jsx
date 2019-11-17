@@ -4,10 +4,12 @@ import './index.css';
 import '../../App.css';
 import Default from '../Default';
 
-import Registration from "../Registration";
-import Login from "../Login";
+//import Registration from "../Registration";
+//import Login from "../Login";
 
-export default class Home extends Component {
+
+//export default class Home extends Component {
+  /*
   constructor(props) {
     super(props);
 
@@ -44,9 +46,7 @@ export default class Home extends Component {
       </Default>
     );
   }
-}
-
-/*
+}*/
 function Home() {
   return (
       <Default>
@@ -60,9 +60,9 @@ function Home() {
     </Default>
   );
 }
-*/
+
 
 //<Route path='/show-book/:id' component={Dashboard} />
 //<Route path='/show-book/:id' component={Other} />
 
-//export default Home;
+export default Home;
