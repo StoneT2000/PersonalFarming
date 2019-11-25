@@ -120,6 +120,8 @@ const HomepageLayout = () => (
             <p style={{ fontSize: '1.33em' }}>
               -  IEEE team113
             </p>
+            <p>{"\n"}</p>
+            <Button size='small'>Get Started</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>
