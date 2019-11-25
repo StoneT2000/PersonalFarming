@@ -16,10 +16,6 @@ const SidebarFarm = (props) => {
         width='thin'
       >
         <Menu.Item as='a' href="/">
-          <Icon name='account_circle' />
-          Login
-        </Menu.Item>
-        <Menu.Item as='a' href="/home">
           <Icon name='home' />
           Home
         </Menu.Item>
@@ -30,6 +26,14 @@ const SidebarFarm = (props) => {
         <Menu.Item as='a' href="/reports">
           <Icon name='sticky note outline' />
           Reports
+        </Menu.Item>
+        <Menu.Item as='a' href="/">
+          <Icon name='globe' />
+          Explore
+        </Menu.Item>
+        <Menu.Item as='a' href="/Login">
+          <Icon name='user' />
+          Login
         </Menu.Item>
       </Sidebar>
 

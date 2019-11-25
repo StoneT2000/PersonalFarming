@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import './index.scss';
-import '../../App.css';
 import Default from '../Default';
 
 import Registration from "./auth/Registration";
@@ -35,11 +34,13 @@ export default class Login extends Component {
     return (
       <Default>
       <div className="Login">
-        <h1>Log in</h1>
-        <h1>Status: {this.props.loggedInStatus}</h1>
-        <button onClick={() => this.handleLogoutClick()}>Logout</button>
-        <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
-        <Signin handleSuccessfulAuth={this.handleSuccessfulAuth} />
+      <div className="App__Aside"></div>
+          <div className="App__Form">
+          <h1>Log in</h1>
+          <button onClick={() => this.handleLogoutClick()}>Logout</button>
+          <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
+          <Signin handleSuccessfulAuth={this.handleSuccessfulAuth} />
+        </div>
       </div>
       </Default>
     );

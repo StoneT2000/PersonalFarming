@@ -17,10 +17,10 @@ function App() {
         <SidebarFarm visibleHandle = {setVisible} visible={visible}>
           <Router>
             <div>
-              <Route exact path='/' component={Login} />
+              <Route exact path='/' component={Home} />
               <Route exact path='/dashboard' component={Dashboard} />
               <Route exact path='/reports' component={Home} />
-              <Route exact path='/home' component={Home} />
+              <Route exact path='/Login' component={Login} />
             </div>
           </Router>
           </SidebarFarm>
