@@ -109,12 +109,10 @@ const HomepageLayout = () => (
               Welcome
             </p>
             <p style={{ fontSize: '1.33em' }}>
-              (replace)We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+            The goal of our project was to improve farming at an urban scale, where mini hydroponics and gardens are more frequent in bustling urban cities like New York City.
             </p>
             <p style={{ fontSize: '1.33em' }}>
-              (replace)Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+            Our project helps improve farming by automating parts of the farming process whilst also giving user feedback on how the plant is doing over time.
             </p>
             <p style={{ fontSize: '1.33em' }}>
               -  IEEE team113
