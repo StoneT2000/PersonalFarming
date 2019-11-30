@@ -188,7 +188,32 @@ const Explore = () => (
                 </button>
                 </div>
             </div>
-          </div>
+          <div class="card">
+              <div class="blurring dimmable image">
+                <div class="ui inverted dimmer">
+                  <div class="content">
+                    <div class="center">
+                      <div class="ui primary button">Add Friend</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ui small image">
+                  <svg width="150" height="160">
+                  </svg>
+                </div>
+                </div>
+              
+              <div class="content">
+                <a class="header">-----</a>
+
+              </div>
+              <div class="extra content">
+                  <Button kind="Dark" onClick={() => console.log("clicked!")}>
+                    Add this to my plants
+                  </Button>
+                </div>
+                </div>
+            </div>
         </Grid.Row>
       </Grid>
     </Segment>
