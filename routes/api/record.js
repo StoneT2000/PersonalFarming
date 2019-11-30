@@ -49,7 +49,6 @@ router.post('/togglepump', (req, res) => {
   res.json({pump: "on"});
 })
 
-
 /* Retrieve data by ID, time frame etc. */
 router.get('/:key', (req, res) => {
   console.log(req.params);

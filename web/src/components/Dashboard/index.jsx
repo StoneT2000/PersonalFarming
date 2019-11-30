@@ -3,6 +3,7 @@ import './index.scss';
 import {Chart, Line, Scatter } from 'react-chartjs-2';
 import Default from '../Default';
 import axios from 'axios';
+import { Message } from 'semantic-ui-react'
 
 function useForceUpdate(){
     const [value, setValue] = useState(true); //boolean state
@@ -67,6 +68,7 @@ let soilMoistureDataset = JSON.parse(JSON.stringify(dataSetOptions));
 soilMoistureDataset.datasets[0].label = "Soil Moisture Levels";
 
 function Dashboard(props) {
+  let [replaceWater, setReplaceWater] = useState(false);
   let [_lightDataset, setLight] = useState(lightDataset);
   let [_tempDataset, setTemp] = useState(tempDataset);
   let [_humidityDataset, setHumidity] = useState(humidityDataset);
@@ -133,6 +135,25 @@ function Dashboard(props) {
     });
 
   }
+  const getWarnings = () => {
+    axios.get('/api/stats/replaceWater/?key=' + userKey,
+    {
+      validateStatus: function (status) {
+        return status < 10000; // Reject only if the status code is greater than or equal to 500
+      }
+    })
+    .then(function (res) {
+      if (res.waterLevelAverage >= 250) {
+        setReplaceWater(true);
+      }
+      else {
+        setReplaceWater(false);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  };
   useEffect(() => {
     getDataAndUpdate();
     setInterval(function() {
@@ -183,14 +204,19 @@ function Dashboard(props) {
   }]
     }
   }
-  //<Line data={plantPreciptationDataset} id='plant-preciptation-data' plugins={phGradient} options={chartOptions}/>
   return (
       <Default>
         <div className="Dashboard">
             <div className="greeting">
             <h1>Dashboard</h1>
-            </div>
+
             <div className="graphs">
+            </div>
+            {replaceWater && <Message
+    warning
+    header='Warning, water is filling up at the bottom of plants'
+    content=''
+  />}
             <h2>Plant Light Levels</h2>
             <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptions}/>
             <h2>Plant Temperature Levels</h2>

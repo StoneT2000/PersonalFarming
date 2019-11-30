@@ -16,10 +16,6 @@ const SidebarFarm = (props) => {
         width='thin'
       >
         <Menu.Item as='a' href="/">
-          <Icon name='account_circle' />
-          Login
-        </Menu.Item>
-        <Menu.Item as='a' href="/home">
           <Icon name='home' />
           Home
         </Menu.Item>
