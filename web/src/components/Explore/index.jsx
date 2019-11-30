@@ -31,8 +31,9 @@ const getWidth = () => {
 
 var sectionStyle = {
   //width: "100%",
-  width: "1350px",
-  height: "700px",
+  width: "100vw",
+  height: "100vh",
+  backgroundSize: "cover",
   backgroundImage: `url(${Background})`
 };
 
@@ -62,7 +63,7 @@ class DesktopContainer extends Component {
 
         {children}
       </Responsive>
-      </section>  
+      </section>
     )
   }
 }
@@ -202,7 +203,7 @@ const Explore = () => (
                   </svg>
                 </div>
                 </div>
-              
+
               <div class="content">
                 <a class="header">-----</a>
 

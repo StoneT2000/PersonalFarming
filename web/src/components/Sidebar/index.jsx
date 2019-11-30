@@ -31,10 +31,6 @@ const SidebarFarm = (props) => {
           <Icon name='globe' />
           Explore
         </Menu.Item>
-        <Menu.Item as='a' href="/login">
-          <Icon name='user' />
-          Login
-        </Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher onClick={() => {

@@ -28,11 +28,11 @@ const getWidth = () => {
 
 var sectionStyle = {
   //width: "100%",
-  width: "1350px",
-  height: "750px",
+  width: "100vw",
+  height: "100vh",
+  backgroundSize: "cover",
   backgroundImage: `url(${Background})`
 };
-
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
