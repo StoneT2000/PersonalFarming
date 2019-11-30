@@ -23,9 +23,17 @@ const SidebarFarm = (props) => {
           <Icon name='chart area' />
           Dashboard
         </Menu.Item>
-        <Menu.Item as='a' href="/reports">
+        <Menu.Item as='a' href="/report">
           <Icon name='sticky note outline' />
           Reports
+        </Menu.Item>
+        <Menu.Item as='a' href="/explore">
+          <Icon name='globe' />
+          Explore
+        </Menu.Item>
+        <Menu.Item as='a' href="/login">
+          <Icon name='user' />
+          Login
         </Menu.Item>
       </Sidebar>
 

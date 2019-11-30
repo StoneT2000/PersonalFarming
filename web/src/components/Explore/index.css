@@ -1,0 +1,13 @@
+.Explore {
+  /*background-color: #fefefe;*/
+  text-align: center;
+  color:white;
+
+}
+.greeting {
+  text-align: left;
+}
+
+.special.cards.image.dimmer{
+  on: 'hover'
+}
