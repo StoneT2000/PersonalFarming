@@ -27,11 +27,11 @@ const SidebarFarm = (props) => {
           <Icon name='sticky note outline' />
           Reports
         </Menu.Item>
-        <Menu.Item as='a' href="/">
+        <Menu.Item as='a' href="/explore">
           <Icon name='globe' />
           Explore
         </Menu.Item>
-        <Menu.Item as='a' href="/Login">
+        <Menu.Item as='a' href="/login">
           <Icon name='user' />
           Login
         </Menu.Item>

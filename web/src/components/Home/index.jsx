@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
@@ -121,7 +120,12 @@ const HomepageLayout = () => (
               -  IEEE team113
             </p>
             <p>{"\n"}</p>
-            <Button size='small'>Get Started</Button>
+            <div class="ui animated button" tabindex="0">
+              <div class="visible content">Next</div>
+              <div class="hidden content">
+                <i class="right arrow icon"></i>
+              </div>
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
