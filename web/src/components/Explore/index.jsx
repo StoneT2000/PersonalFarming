@@ -32,7 +32,7 @@ const getWidth = () => {
 var sectionStyle = {
   //width: "100%",
   width: "1350px",
-  height: "600px",
+  height: "700px",
   backgroundImage: `url(${Background})`
 };
 
@@ -144,9 +144,9 @@ const Explore = () => (
                   </div>
                 </div>
                 <div class="extra content">
-                  <Button kind="Dark" onClick={() => console.log("clicked!")}>
-                    Add this to my plants
-                  </Button>
+                <button class="ui disabled button">
+                  Added
+                </button>
                 </div>
               </div>
             <div class="card">
@@ -183,9 +183,9 @@ const Explore = () => (
                 </div>
               </div>
               <div class="extra content">
-                  <Button kind="Dark" onClick={() => console.log("clicked!")}>
-                    Add this to my plants
-                  </Button>
+              <button class="ui disabled button">
+                  Added
+                </button>
                 </div>
             </div>
           </div>

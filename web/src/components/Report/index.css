@@ -1,0 +1,17 @@
+.Home {
+  /*background-color: #fefefe;*/
+  text-align: center;
+  color:white;
+
+}
+.greeting {
+  text-align: left;
+  color:black
+}
+
+.Report__Form {
+  width: 100%;
+  color: #2E4158;
+
+  overflow: auto;
+}

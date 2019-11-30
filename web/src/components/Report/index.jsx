@@ -15,7 +15,7 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
-import Background from './b5.jpg';
+import Background from './b4.jpg';
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -99,38 +99,36 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const Home = () => (
+const Explore = () => (
   <ResponsiveContainer>
-    <Segment style={{ padding: '10em 0em' }} vertical>
+    <Segment style={{ padding: '5em 0em' }} vertical>
       <Grid container stackable verticalAlign='left'>
         <Grid.Row>
           <Grid.Column width={8}>
           <p style={{ fontSize: '2.0em' }}>
-              Welcome
+              Reports
+            </p>
+            <p style={{ fontSize: '1.5em' }}>
+              Summary of:    Cilantro
             </p>
             <p style={{ fontSize: '1.33em' }}>
-            The goal of our project was to improve farming at an urban scale, where mini hydroponics and gardens are more frequent in bustling urban cities like New York City.
+            - Light level: Normal
             </p>
             <p style={{ fontSize: '1.33em' }}>
-            Our project helps improve farming by automating parts of the farming process whilst also giving user feedback on how the plant is doing over time.
+            - Moisture level: Normal
             </p>
             <p style={{ fontSize: '1.33em' }}>
-              -  IEEE team113
+            - Humidity level: Normal
             </p>
             <p>{"\n"}</p>
-            <div class="ui animated button" tabindex="0">
-              <div class="visible content">Next</div>
-              <div class="hidden content">
-                <i class="right arrow icon"></i>
-              </div>
-            </div>
+
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Segment>
   </ResponsiveContainer>
 )
-export default Home
+export default Explore
 
 
 

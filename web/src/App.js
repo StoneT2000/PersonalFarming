@@ -8,6 +8,7 @@ import Home from './components/Home/index';
 import Dashboard from './components/Dashboard/index';
 import Login from './components/Login/index';
 import Explore from './components/Explore/index';
+import Report from './components/Report/index';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -20,7 +21,7 @@ function App() {
             <div>
               <Route exact path='/' component={Home} />
               <Route exact path='/dashboard' component={Dashboard} />
-              <Route exact path='/reports' component={Home} />
+              <Route exact path='/report' component={Report} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/explore' component={Explore} />
             </div>
