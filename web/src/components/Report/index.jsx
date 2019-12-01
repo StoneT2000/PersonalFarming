@@ -22,6 +22,7 @@ import {
   Dimmer
 } from 'semantic-ui-react'
 import Background from './b4.jpg';
+import "./index.css";
 
 Chart.defaults.global.animation.duration = 0;
 let dataSetOptions = {
@@ -66,11 +67,11 @@ let minDataset =
     borderDash: [],
     borderDashOffset: 0.0,
     borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
+    pointBorderColor: 'rgba(145,152,232,1)',
     pointBackgroundColor: '#fff',
     pointBorderWidth: 1,
     pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+    pointHoverBackgroundColor: 'rgba(145,152,232,1)',
     pointHoverBorderColor: 'rgba(220,220,220,1)',
     pointHoverBorderWidth: 2,
     pointRadius: 3,
@@ -90,11 +91,11 @@ let maxDataset =
     borderDash: [],
     borderDashOffset: 0.0,
     borderJoinStyle: 'miter',
-    pointBorderColor: 'rgba(75,192,192,1)',
+    pointBorderColor: 'rgba(195,75,75,1)',
     pointBackgroundColor: '#fff',
     pointBorderWidth: 1,
     pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+    pointHoverBackgroundColor: 'rgba(195,75,75,1)',
     pointHoverBorderColor: 'rgba(220,220,220,1)',
     pointHoverBorderWidth: 2,
     pointRadius: 3,
@@ -372,25 +373,25 @@ const Explore = () => {
 
     <div style={{ padding: '3em 0em'}}>
     <h1 style={{ textAlign:"left"}}>View averages on temperature, light, humidity and more in the past day</h1>
-
-    {loadingData === false ? <div>{warnings.map( (warning) => {
+    {warnings.map( (warning) => {
       console.log(warning);
       return (<Message
-  warning
-  header={warning}
-  content=''
-  />)
+    warning
+    header={warning}
+    content=''
+    />)
     })}
+    {loadingData === false ? <div className="DataDiv">
     {warnings.length === 0 && <p>Everything looks great! No issues today</p>}
-    <h2>Plant Light Levels</h2>
-          <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} options={chartOptionsL}/>
 
-          <h2>Plant Temperature</h2>
-          <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} options={chartOptionsT}/>
-          <h2>Plant Humidity</h2>
-          <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity}options={chartOptionsH}/>
-          <h2>Soil Moisture</h2>
-          <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} options={chartOptionsM}/></div> : <Dimmer active>
+          <div className="plantData"><h2>Plant Light Levels</h2><Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} options={chartOptionsL} width={50} height={50}/></div>
+
+
+          <div className="plantData"><h2>Plant Temperature</h2><Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} options={chartOptionsT} width={50} height={50}/></div>
+
+          <div className="plantData"><h2>Plant Humidity</h2><Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity}options={chartOptionsH} width={50} height={50}/></div>
+
+          <div className="plantData"><h2>Soil Moisture</h2><Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} options={chartOptionsM} width={50} height={50}/></div></div> : <Dimmer active>
       <Loader />
     </Dimmer>}
     </div>
