@@ -12,12 +12,14 @@ import {
   Icon,
   Image,
   List,
+  Loader,
   Menu,
   Responsive,
   Segment,
   Sidebar,
   Message,
   Visibility,
+  Dimmer
 } from 'semantic-ui-react'
 import Background from './b4.jpg';
 
@@ -135,6 +137,7 @@ soilMoistureMinDataset.data.push(soilMoistureBounds.min, soilMoistureBounds.min)
 
 
 const Explore = () => {
+  let [loadingData, setLoadingData] = useState(true);
   let [_lightDataset, setLight] = useState(lightDataset);
   let [_tempDataset, setTemp] = useState(tempDataset);
   let [_humidityDataset, setHumidity] = useState(humidityDataset);
@@ -190,24 +193,25 @@ const Explore = () => {
       if (soilMoistureBounds.max < res.data.soilMoistureAvg || soilMoistureBounds.min > res.data.soilMoistureAvg) {
         let w = warnings;
         w.push("Soil moisture is out of optimal region!");
-        setWarnings(w);
+        setWarnings([...warnings]);
       }
       if (lightBounds.max < res.data.lightAvg || lightBounds.min > res.data.lightAvg) {
         let w = warnings;
         w.push("Light levels are out of optimal region!");
-        setWarnings(w);
+        setWarnings([...warnings]);
       }
       if (tempBounds.max < res.data.temperatureAvg || tempBounds.min > res.data.temperatyreAvg) {
         let w = warnings;
         w.push("Temperature is out of optimal region!");
-        setWarnings(w);
+        setWarnings([...warnings]);
       }
-    if (humidityBounds.max < res.data.humidityAvg || humidityBounds.min > res.data.humidityAvg) {
+      if (humidityBounds.max < res.data.humidityAvg || humidityBounds.min > res.data.humidityAvg) {
         let w = warnings;
         w.push("Humidity is out of optimal region!");
-        setWarnings(w);
+        setWarnings([...warnings]);
       }
       console.log(warnings);
+      setLoadingData(false);
 
     })
     .catch(function (error) {
@@ -362,17 +366,22 @@ const Explore = () => {
   }]
     }
   }
+
   return (
     <Default>
 
     <div style={{ padding: '3em 0em'}}>
     <h1 style={{ textAlign:"left"}}>View averages on temperature, light, humidity and more in the past day</h1>
 
-    {warnings.forEach( warning => <Message
-warning
-header={warning}
-content=''
-/>) && console.log(warnings)}
+    {loadingData === false ? <div>{warnings.map( (warning) => {
+      console.log(warning);
+      return (<Message
+  warning
+  header={warning}
+  content=''
+  />)
+    })}
+    {warnings.length === 0 && <p>Everything looks great! No issues today</p>}
     <h2>Plant Light Levels</h2>
           <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} options={chartOptionsL}/>
 
@@ -381,7 +390,9 @@ content=''
           <h2>Plant Humidity</h2>
           <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity}options={chartOptionsH}/>
           <h2>Soil Moisture</h2>
-          <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} options={chartOptionsM}/>
+          <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} options={chartOptionsM}/></div> : <Dimmer active>
+      <Loader />
+    </Dimmer>}
     </div>
     </Default>
 )
