@@ -20,15 +20,18 @@ router.get("/aggregate", (req, res) => {
       let temperatureAvg = 0;
       let lightAvg = 0;
       let soilMoistureAvg = 0;
+      let humidityAvg = 0;
       stats.forEach( (stat) => {
         temperatureAvg += stat.temperature.bytes.readUInt8();
         lightAvg += stat.light.bytes.readUInt8();
         soilMoistureAvg += stat.soilMoisture.bytes.readUInt8();
+        humidityAvg += stat.humidity.bytes.readUInt8();
       })
       temperatureAvg/= stats.length;
       lightAvg/= stats.length;
       soilMoistureAvg/= stats.length;
-      res.status(200).json({temperatureAvg: temperatureAvg, soilMoistureAvg: soilMoistureAvg, lightAvg: lightAvg})
+      humidityAvg/= stats.length;
+      res.status(200).json({temperatureAvg: temperatureAvg, soilMoistureAvg: soilMoistureAvg, lightAvg: lightAvg, humidtyAvg: humidityAvg})
     });
 })
 
