@@ -30,14 +30,13 @@ const getWidth = () => {
 
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
-
 var sectionStyle = {
   //width: "100%",
-  width: "1350px",
-  height: "750px",
+  width: "100vw",
+  height: "calc(100vh - 40px)",
+  backgroundSize: "cover",
   backgroundImage: `url(${Background})`
 };
-
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
@@ -54,17 +53,8 @@ class DesktopContainer extends Component {
 
     return (
       <section style={ sectionStyle }>
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-        </Visibility>
-
         {children}
-      </Responsive>
-      </section>  
+      </section>
     )
   }
 }

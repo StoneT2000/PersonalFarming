@@ -29,7 +29,7 @@ const getWidth = () => {
 var sectionStyle = {
   //width: "100%",
   width: "100vw",
-  height: "100vh",
+  height: "calc(100vh - 40px)",
   backgroundSize: "cover",
   backgroundImage: `url(${Background})`
 };
@@ -49,16 +49,7 @@ class DesktopContainer extends Component {
 
     return (
       <section style={ sectionStyle }>
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-        </Visibility>
-
         {children}
-      </Responsive>
       </section>
     )
   }

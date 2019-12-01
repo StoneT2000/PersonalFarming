@@ -32,9 +32,11 @@ const getWidth = () => {
 var sectionStyle = {
   //width: "100%",
   width: "100vw",
-  height: "100vh",
+  height: "calc(100vh - 40px)",
   backgroundSize: "cover",
-  backgroundImage: `url(${Background})`
+  backgroundImage: `url(${Background})`,
+  display: "flex",
+  justifyContent: "center",
 };
 
 /* Heads up!
@@ -53,16 +55,7 @@ class DesktopContainer extends Component {
 
     return (
       <section style={ sectionStyle }>
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-        </Visibility>
-
         {children}
-      </Responsive>
       </section>
     )
   }
@@ -72,30 +65,9 @@ DesktopContainer.propTypes = {
   children: PropTypes.node,
 }
 
-class MobileContainer extends Component {
-  state = {}
-
-  render() {
-
-    return (
-      <Responsive
-        as={Sidebar.Pushable}
-        getWidth={getWidth}
-        maxWidth={Responsive.onlyMobile.maxWidth}
-      >
-      </Responsive>
-    )
-  }
-}
-
-MobileContainer.propTypes = {
-  children: PropTypes.node,
-}
-
 const ResponsiveContainer = ({ children }) => (
   <div>
     <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
   </div>
 )
 
