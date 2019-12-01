@@ -1,5 +1,8 @@
+import React, {Component, useEffect, useState} from 'react';
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import Default from '../Default';
+import axios from 'axios';
+import { Message } from 'semantic-ui-react'
 import {
   Button,
   Container,
@@ -16,6 +19,8 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import Background from './b4.jpg';
+
+
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -98,6 +103,10 @@ const ResponsiveContainer = ({ children }) => (
 ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
+
+
+
+
 
 const Explore = () => (
   <ResponsiveContainer>

@@ -131,16 +131,16 @@ const Explore = () => (
                     </p>
                   </span>
                   <p style={{ fontSize: '1em' }}>
-                    Light: Full Sun ~ Part Shadow
+                    Light: Full Sun ~ Part Shadow (390 ~ 470 Microvolt)
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
-                    Temperature: 71.6 ~ 77.0 °f
+                    Temperature: 22.0 ~ 25.0 °C
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
                     Humidity: 70.0 ~ 75.0 %
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
-                    Moisture: Slightly soggy
+                    Moisture: Slightly soggy (60% ~ 80%)
                   </p>
                   </div>
                 </div>
@@ -173,13 +173,13 @@ const Explore = () => (
                     Light: Part Sun ~ Indirect Sun
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
-                    Temperature: 70.0 ~ 75.0 °f
+                    Temperature: 23.5 ~ 28.0 °C
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
                     Humidity: 25.0 ~ 30.0 %
                   </p>
                   <p style={{ fontSize: '1.05em' }}>
-                    Moisture: Airy
+                    Moisture: Airy (35% ~ 56%)
                   </p>
                 </div>
               </div>

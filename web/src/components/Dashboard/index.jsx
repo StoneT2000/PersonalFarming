@@ -183,7 +183,8 @@ function Dashboard(props) {
       chart.data.datasets[0].backgroundColor = gradientStroke;
     }
   }]
-  let chartOptions = {
+
+  let chartOptionsL = {
     title: {
       fontColor: "white"
     },
@@ -195,15 +196,130 @@ function Dashboard(props) {
     scales: {
       yAxes: [{ticks: {
         fontColor: "whitew",
-        suggestedMax: 3.4
+        suggestedMax: 3.4,
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'Microvolts',
+        fontColor: "whitew",
+        font: 'Helvetica'
       }
     }],
     xAxes: [{ticks: {
-      fontColor: "whitew"
+      fontColor: "whitew",
+    },
+    scaleLabel: {
+      display: true,
+      labelString: 'Time',
+      fontColor: "whitew",
+      font: 'Helvetica'
     }
   }]
     }
   }
+
+  let chartOptionsT = {
+    title: {
+      fontColor: "white"
+    },
+    legend: {
+      labels: {
+        fontColor: "white"
+      }
+    },
+    scales: {
+      yAxes: [{ticks: {
+        fontColor: "whitew",
+        suggestedMax: 3.4,
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'Celsius',
+        fontColor: "whitew",
+        font: 'Helvetica'
+      }
+    }],
+    xAxes: [{ticks: {
+      fontColor: "whitew",
+    },
+    scaleLabel: {
+      display: true,
+      labelString: 'Time',
+      fontColor: "whitew",
+      font: 'Helvetica'
+    }
+  }]
+    }
+  }
+
+  let chartOptionsH = {
+    title: {
+      fontColor: "white"
+    },
+    legend: {
+      labels: {
+        fontColor: "white"
+      }
+    },
+    scales: {
+      yAxes: [{ticks: {
+        fontColor: "whitew",
+        suggestedMax: 3.4,
+      },
+      scaleLabel: {
+        display: true,
+        labelString: '%',
+        fontColor: "whitew",
+        font: 'Helvetica'
+      }
+    }],
+    xAxes: [{ticks: {
+      fontColor: "whitew",
+    },
+    scaleLabel: {
+      display: true,
+      labelString: 'Time',
+      fontColor: "whitew",
+      font: 'Helvetica'
+    }
+  }]
+    }
+  }
+
+  let chartOptionsM = {
+    title: {
+      fontColor: "white"
+    },
+    legend: {
+      labels: {
+        fontColor: "white"
+      }
+    },
+    scales: {
+      yAxes: [{ticks: {
+        fontColor: "whitew",
+        suggestedMax: 3.4,
+      },
+      scaleLabel: {
+        display: true,
+        labelString: '%',
+        fontColor: "whitew",
+        font: 'Helvetica'
+      }
+    }],
+    xAxes: [{ticks: {
+      fontColor: "whitew",
+    },
+    scaleLabel: {
+      display: true,
+      labelString: 'Time',
+      fontColor: "whitew",
+      font: 'Helvetica'
+    }
+  }]
+    }
+  }
+
   return (
       <Default>
         <div className="Dashboard">
@@ -217,14 +333,15 @@ function Dashboard(props) {
     header='Warning, water is filling up at the bottom of plants'
     content=''
   />}
-            <h2>Plant Light Levels</h2>
-            <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptions}/>
-            <h2>Plant Temperature Levels</h2>
-            <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient} options={chartOptions}/>
-            <h2>Plant Humidity Levels</h2>
-            <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient} options={chartOptions}/>
-            <h2>Soil Moisture Levels</h2>
-            <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient} options={chartOptions}/>
+            <h2>Plant Light</h2>
+            <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptionsL}/>
+            
+            <h2>Plant Temperature</h2>
+            <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient} options={chartOptionsT}/>
+            <h2>Plant Humidity</h2>
+            <Line data={_humidityDataset} id='plant-humidity-data' ref={chartReferenceHumidity} plugins={phGradient} options={chartOptionsH}/>
+            <h2>Soil Moisture</h2>
+            <Line data={_soilMoistureDataset} id='plant-soil-data' ref={chartReferenceSoilMoisture} plugins={phGradient} options={chartOptionsM}/>
             </div>
         </div>
     </Default>
