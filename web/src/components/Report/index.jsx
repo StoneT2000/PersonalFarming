@@ -98,7 +98,32 @@ ResponsiveContainer.propTypes = {
 
 
 
-const Explore = () => (
+const Explore = () => {
+  let userKey = "Helloplants!"; // props.user.key
+  let [averages, setAverages] = useState({});
+  const getAveragesAndUpdate = () => {
+    axios.get('/api/stats/aggregate/?key=' + userKey,
+    {
+      validateStatus: function (status) {
+        return status < 10000; // Reject only if the status code is greater than or equal to 500
+      }
+    })
+    .then(function (res) {
+      setAverages(res.data);
+      console.log(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+
+  }
+  useEffect( () => {
+    getAveragesAndUpdate();
+  }, []);
+  return (
   <ResponsiveContainer>
     <Segment style={{ padding: '5em 0em' }} vertical>
       <Grid container stackable verticalAlign='left'>
@@ -127,6 +152,7 @@ const Explore = () => (
     </Segment>
   </ResponsiveContainer>
 )
+}
 export default Explore
 
 
