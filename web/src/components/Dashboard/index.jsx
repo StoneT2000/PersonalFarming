@@ -335,7 +335,7 @@ function Dashboard(props) {
   />}
             <h2>Plant Light</h2>
             <Line data={_lightDataset} id='plant-light-data' ref={chartReferenceLight} plugins={phGradient} options={chartOptionsL}/>
-            
+
             <h2>Plant Temperature</h2>
             <Line data={_tempDataset} id='plant-temp-data' ref={chartReferenceTemp} plugins={phGradient} options={chartOptionsT}/>
             <h2>Plant Humidity</h2>

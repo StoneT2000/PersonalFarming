@@ -31,7 +31,7 @@ router.get("/aggregate", (req, res) => {
       lightAvg/= stats.length;
       soilMoistureAvg/= stats.length;
       humidityAvg/= stats.length;
-      res.status(200).json({temperatureAvg: temperatureAvg, soilMoistureAvg: soilMoistureAvg, lightAvg: lightAvg, humidtyAvg: humidityAvg})
+      res.status(200).json({temperatureAvg: temperatureAvg, soilMoistureAvg: soilMoistureAvg, lightAvg: lightAvg, humidityAvg: humidityAvg})
     });
 })
 
